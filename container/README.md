@@ -56,7 +56,7 @@ checkpoints should be mounted to a separate writable output directory:
 
 ~~~bash
 docker run --rm \
-  -v "$PWD/data:/work/data:ro" \
+  -v "$PWD/data/handoff:/data/handoff:ro" \
   -v "$PWD/manifests:/work/manifests:ro" \
   -v "$PWD/outputs:/work/outputs" \
   thesnowgoose19750415/zchen-disorder-predictor:cpu-esm2-v1 \
