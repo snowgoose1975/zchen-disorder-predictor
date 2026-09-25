@@ -1,0 +1,17 @@
+FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+
+WORKDIR /opt/my-predictor
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+COPY requirements-esm2.txt ./
+
+RUN pip install --no-cache-dir numpy \
+    && pip install --no-cache-dir -r requirements-esm2.txt
+
+COPY my_predictor ./my_predictor
+COPY scripts ./scripts
+COPY pyproject.toml README.md ./
+
+ENTRYPOINT ["python", "-m"]
+CMD ["scripts.predict", "--help"]

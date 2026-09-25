@@ -1,0 +1,18 @@
+FROM python:3.12-slim
+
+WORKDIR /opt/my-predictor
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+COPY requirements-esm2.txt ./
+
+RUN pip install --no-cache-dir numpy \
+    && pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch \
+    && pip install --no-cache-dir -r requirements-esm2.txt
+
+COPY my_predictor ./my_predictor
+COPY scripts ./scripts
+COPY pyproject.toml README.md ./
+
+ENTRYPOINT ["python", "-m"]
+CMD ["scripts.predict", "--help"]
