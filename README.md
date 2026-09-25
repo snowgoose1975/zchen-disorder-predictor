@@ -52,6 +52,30 @@ Embeddings may be `.npy` arrays or `.npz` archives. The current ESM2 handoff use
 - `bigru`: bidirectional GRU sequence-context head
 - `conv_bigru`: convolution plus bidirectional GRU
 
+## Build a manifest
+
+If your handoff contains `catalogue/records.tsv`,
+`development/records.jsonl.gz`, and `catalogue/assets.tsv`, build the shared
+train/validation/test manifests as follows:
+
+```bash
+mkdir -p manifests
+docker run --rm \
+  -v "$PWD/data/handoff:/data/handoff:ro" \
+  -v "$PWD/manifests:/work/manifests" \
+  thesnowgoose19750415/zchen-disorder-predictor:cpu-esm2-v1 \
+  scripts.build_manifest \
+  --data-root /data/handoff \
+  --output-dir /work/manifests/esm2-layer30 \
+  --asset-type esm2 \
+  --embedding-key layer_30
+```
+
+The command writes split TSV files and label/mask assets under `manifests/`.
+Because the TSV stores container-visible paths, keep the `/data/handoff` and
+`/work/manifests` mount points unchanged in later commands. If you already
+have a compatible manifest, skip this step.
+
 ## Train, predict, and evaluate
 
 Mount source data read-only and outputs/checkpoints read-write:
