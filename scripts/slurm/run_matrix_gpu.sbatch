@@ -8,12 +8,13 @@
 #SBATCH --output=slurm-%x-%j.out
 #SBATCH --error=slurm-%x-%j.err
 
-# Submit only after an administrator has associated a valid account:
+# Submit only after the target cluster has provided a valid account and GPU
+# partition. The account and partition names are site-specific.
 # sbatch --account=<ACCOUNT> scripts/slurm/run_matrix_gpu.sbatch
 set -euo pipefail
 
 : "${PREDICTOR_SIF:?set PREDICTOR_SIF to a user-owned Apptainer SIF}"
-WORK_ROOT="${WORK_ROOT:-/home/zchen/disorder-baselines/own-predictor}"
+WORK_ROOT="${WORK_ROOT:-${PWD}/work}"
 MANIFEST_ROOT="${MANIFEST_ROOT:-${WORK_ROOT}/manifests}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-${WORK_ROOT}/outputs/matrix}"
 EMBEDDING_FAMILIES="${EMBEDDING_FAMILIES:-esm2-layer30,prott5-layer24,esmc-layer30}"
