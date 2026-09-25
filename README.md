@@ -58,6 +58,7 @@ Mount source data read-only and outputs/checkpoints read-write:
 
 ```bash
 docker run --rm \
+  -v "$PWD/data/handoff:/data/handoff:ro" \
   -v "$PWD/manifests:/work/manifests:ro" \
   -v "$PWD/outputs:/work/outputs" \
   thesnowgoose19750415/zchen-disorder-predictor:cpu-esm2-v1 \
@@ -70,6 +71,7 @@ docker run --rm \
   --device cpu
 
 docker run --rm \
+  -v "$PWD/data/handoff:/data/handoff:ro" \
   -v "$PWD/manifests:/work/manifests:ro" \
   -v "$PWD/outputs:/work/outputs" \
   thesnowgoose19750415/zchen-disorder-predictor:cpu-esm2-v1 \
@@ -80,6 +82,7 @@ docker run --rm \
   --device cpu
 
 docker run --rm \
+  -v "$PWD/data/handoff:/data/handoff:ro" \
   -v "$PWD/manifests:/work/manifests:ro" \
   -v "$PWD/outputs:/work/outputs" \
   thesnowgoose19750415/zchen-disorder-predictor:cpu-esm2-v1 \
