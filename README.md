@@ -12,7 +12,7 @@ The first Docker Hub release is:
 thesnowgoose19750415/zchen-disorder-predictor:gpu-esm2-v1
 ```
 
-It was built from the local development image `my-disorder-predictor:gpu-esm2-v17-offline`. The word `offline` is only a local image tag; it is not a Docker runtime mode and does not change CUDA behavior. The current Dockerfile does not bundle ESM2 model weights. Precomputed embeddings do not require ESM2 weights, while FASTA-to-embedding inference needs a local model directory or network access to obtain the model.
+It was built from the local development image `my-disorder-predictor:gpu-esm2-v17`. The current Dockerfile does not bundle ESM2 model weights. Precomputed embeddings do not require ESM2 weights, while FASTA-to-embedding inference needs.
 
 The corresponding CPU release can use `thesnowgoose19750415/zchen-disorder-predictor:cpu-esm2-v1`.
 
